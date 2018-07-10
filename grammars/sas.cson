@@ -119,16 +119,50 @@ patterns: [
   'constant': {
     patterns: [
       {
+        match: '\\b(\\d+\\.?\\d*|\\.\\d+)((e|E)[\\+-]?\\d+)?\\b'
         name: 'constant.numeric.sas'
-        match: '[\\+-]?\\b(\\d+\\.?\\d*|\\.\\d+)((e|E)[\\+-]?\\d+)?\\b'
+      }
+      {
+        match: '\\s+(\\.)\\s+'
+        name: 'constant.language.missing.sas'
       }
     ]
   }
   'operator': {
+    # According to "SAS Operators in Expressions":
+    # https://support.sas.com/documentation/cdl/en/lrcon/62955/HTML/default/viewer.htm#a000780367.htm
     patterns: [
       {
-        match: '\\b(?i:(and|eq|ge|gt|in|le|lt|ne|not|or))\\b'
-        name: 'keyword.operator.sas'
+        match: '\\b(?i:(eq|ge|gt|in|le|lt|ne))\\b'
+        name: 'keyword.operator.comparison.sas'
+      }
+      {
+        match: '\\b(^=|¬=|~=|=|>=|<=|>|<)\\b'
+        name: 'keyword.operator.comparison.sas'
+      }
+      {
+        match: '\\b(\\+|-|/|\\*\\*|\\*)\\b'
+        name: 'keyword.operator.arithmetic.sas'
+      }
+      {
+        match: '(?<=\\d)(:)(?=\\d)'
+        name: 'keyword.operator.range.sas'
+      }
+      {
+        match: '\\b(\\|\\|)\\b'
+        name: 'keyword.operator.concatenation.sas'
+      }
+      {
+        match: '\\b(&|\\||!|¦|¬|\\^|~|(?i:(and|or|not)))\\b'
+        name: 'keyword.operator.logical.sas'
+      }
+      {
+        match: ','
+        name: 'keyword.operator.arguments.sas'
+      }
+      {
+        match: ';'
+        name: 'punctuation.terminator.statement.semicolon.sas'
       }
     ]
   }
