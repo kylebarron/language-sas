@@ -14,10 +14,7 @@ patterns: [
   {include: '#variable'}
   {include: '#function'}
   {include: '#macro'}
-  {
-    name: 'keyword.operator.sas'
-    match: '\\b(?i:(and|eq|ge|gt|in|le|lt|ne|not|or))\\b'
-  }
+  {include: '#operator'}
 ]
 'repository': {
   'data':{
@@ -35,6 +32,7 @@ patterns: [
           {include: '#variable'}
           {include: '#function'}
           {include: '#macro'}
+          {include: '#operator'}
           {
             name: 'keyword.control.data-step.sas'
             match: '\\b(?i:(continue|do|else|end|go|if|leave|link|return|then|to|otherwise|over|select|until|when|while))\\b'
@@ -91,6 +89,7 @@ patterns: [
           {include: '#variable'}
           {include: '#function'}
           {include: '#macro'}
+          {include: '#operator'}
           {
             name: 'support.function.procedure.sas'
             match: '((^|(?<=;))\\s*)(?i:(abort|age|append|array|attrib|audit|block|break|by|calid|cdfplot|change|checkbox|class|classlev|column|compute|contents|copy|create|datarow|dbencoding|define|delete|deletefunc|deletesubr|delimiter|device|dialog|dur|endcomp|exact|exchange|exclude|explore|fin|fmtlib|fontfile|fontpath|format|formats|freq|function|getnames|guessingrows|hbar|hdfs|histogram|holidur|holistart|holivar|id|idlabel|informat|inset|invalue|item|key|keylabel|keyword|label|line|link|listfunc|listsubr|mapmiss|mapreduce|mean|menu|messages|meta|modify|outargs|outdur|outfin|output|outstart|pageby|partial|picture|pie|pig|plot|ppplot|printer|probplot|profile|prompter|qqplot|radiobox|ranks|rbreak|rbutton|rebuild|record|remove|rename|repair|report|roptions|save|select|selection|separator|source|star|start|statistics|struct|submenu|subroutine|sum|sumby|table|tables|test|text|trantab|truetype|type1|types|value|var|vbar|ways|weight|where|with|write))\\b'
@@ -122,6 +121,14 @@ patterns: [
       {
         name: 'constant.numeric.sas'
         match: '[\\+-]?\\b(\\d+\\.?\\d*|\\.\\d+)((e|E)[\\+-]?\\d+)?\\b'
+      }
+    ]
+  }
+  'operator': {
+    patterns: [
+      {
+        match: '\\b(?i:(and|eq|ge|gt|in|le|lt|ne|not|or))\\b'
+        name: 'keyword.operator.sas'
       }
     ]
   }
