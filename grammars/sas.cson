@@ -141,7 +141,7 @@ patterns: [
         name: 'keyword.operator.comparison.sas'
       }
       {
-        match: '\\b(\\+|-|/|\\*\\*|\\*)\\b'
+        match: '(\\+|-|/|\\*\\*|\\*)'
         name: 'keyword.operator.arithmetic.sas'
       }
       {
@@ -195,18 +195,12 @@ patterns: [
   'variable': {
     patterns: [
       {
-        name: 'variable.language.sas'
         match: '\\b((?i:_(all|automatic|character|data|error|infile|last|n|name|null|numeric|user|webout)_))\\b'
-        captures:
-          1:
-            name: 'punctuation.definition.variable.sas'
+        name: 'variable.language.special.sas'
       }
       {
-        name: 'variable.other.format.sas'
         match: '\\b(\\w*[A-Za-z]\\.)(?![\\w\\*])'
-        captures:
-          1:
-            name: 'punctuation.definition.variable.sas'
+        name: 'variable.other.format.sas'
       }
     ]
   }
