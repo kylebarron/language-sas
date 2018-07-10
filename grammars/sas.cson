@@ -58,37 +58,20 @@ patterns: [
   'proc-sql': {
     patterns: [
       {
-        begin: '((^|(?<=;))\\s*)((?i:proc\\s+sql\\b))'
+        begin: '(^|(?<=;))\\s*((?i:proc\\s+sql))\\b[^;]*(;)'
         beginCaptures:
-          1:
-            name: 'punctuation.whitespace.function.leading.sas'
-          3:
-            name: 'support.function.procedure.sas'
-        end: '((^|(?<=;))\\s*)((?i:quit\\s*))(?=;)'
-        endCaptures:
-          1:
-            name: 'punctuation.whitespace.function.leading.sas'
-          3:
-            name: 'support.function.procedure.sas'
-        patterns: [
-          {include: '#comment'}
-          {include: '#string'}
-          {include: '#constant'}
-          {include: '#variable'}
-          {include: '#function'}
-          {include: '#macro'}
-          {
-            name: 'keyword.control.procedure.sql.sas'
-            match: '\\b(?i:(as|by|case|cross|else|end|except|from|full|group|having|inner|intersect|into|join|left|natural|on|order|outer|right|select|then|union|when|where))\\b'
-          }
-          {
-            name: 'keyword.operator.procedure.sql.sas'
-            match: '\\b(?i:(between|contains|exists|in|is|like))\\b'
-          }
-          {
+          2:
             name: 'support.function.procedure.sql.sas'
-            match: '((^|(?<=;))\\s*)(?i:(alter\\s+(table|)|connect|create\\s+(index|table|view|)|delete|describe|disconnect|drop|excute|insert|reset|select|update|validate|where))\\b'
-          }
+          3:
+            name: 'punctuation.terminator.statement.semicolon.sas'
+        end: '(^|(?<=;))\\s*((?i:quit\\s*))(;)'
+        endCaptures:
+          2:
+            name: 'support.function.procedure.sas'
+          3:
+            name: 'punctuation.terminator.statement.semicolon.sas'
+        patterns: [
+          include: 'source.sql'
         ]
       }
     ]
