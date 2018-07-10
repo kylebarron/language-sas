@@ -23,11 +23,9 @@ patterns: [
   'data':{
     patterns: [
       {
-        begin: '(?:(^|(?<=;))\\s*)((?i:data))\\b'
+        begin: '(^|(?<=;))\\s*((?i:data))\\b'
         beginCaptures:
-          1:
-            name: 'punctuation.whitespace.function.leading.sas'
-          3:
+          2:
             name: 'support.function.data-step.sas'
         end: '(^|(?<=;))(?=\\s*((?i:(data|endsas|proc|run)))\\b)'
         patterns: [
@@ -98,11 +96,9 @@ patterns: [
   'proc': {
     patterns: [
       {
-        begin: '((^|(?<=;))\\s*)((?i:proc\\s+\\w*))'
+        begin: '(^|(?<=;))\\s*((?i:proc\\s+\\w*))'
         beginCaptures:
-          1:
-            name: 'punctuation.whitespace.function.leading.sas'
-          3:
+          2:
             name: 'support.function.procedure.sas'
         end: '(^|(?<=;))(?=\\s*((?i:(data|endsas|proc|quit|run)))\\b)'
         patterns: [
