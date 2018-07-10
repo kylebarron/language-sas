@@ -5,6 +5,9 @@
 ]
 name: 'SAS'
 patterns: [
+  {include: '#data'}
+  {include: '#proc-sql'}
+  {include: '#proc'}
   {include: '#comment'}
   {include: '#string'}
   {include: '#constant'}
@@ -15,103 +18,112 @@ patterns: [
     name: 'keyword.operator.sas'
     match: '\\b(?i:(and|eq|ge|gt|in|le|lt|ne|not|or))\\b'
   }
-  # Data step
-  {
-    begin: '((^|(?<=;))\\s*)((?i:data))\\b'
-    beginCaptures:
-      1:
-        name: 'punctuation.whitespace.function.leading.sas'
-      3:
-        name: 'support.function.data-step.sas'
-    end: '(^|(?<=;))(?=\\s*((?i:(data|endsas|proc|run)))\\b)'
-    patterns: [
-      {include: '#comment'}
-      {include: '#string'}
-      {include: '#constant'}
-      {include: '#variable'}
-      {include: '#function'}
-      {include: '#macro'}
-      {
-        name: 'keyword.control.data-step.sas'
-        match: '\\b(?i:(continue|do|else|end|go|if|leave|link|return|then|to|otherwise|over|select|until|when|while))\\b'
-      }
-      {
-        match: '((^|(?<=;))\\s*)((?i:(abort|array|attrib|by|call|cards|cards4|data|datalines|datalines4|delete|describe|display|drop|error|execute|file|format|infile|informat|input|keep|label|length|list|lostcard|merge|modify|output|put|putlog|redirect|remove|rename|replace|retain|set|update|where|window))\\b)'
-        captures:
-          3:
-            name: 'support.function.data-step.sas'
-      }
-      {
-        match: '((^|(?<=;))\\s*)((?i:declare\\s+(hash|hiter|javaobj|)))'
-        captures:
-          3:
-            name: 'support.function.declare.sas'
-      }
-    ]
-  }
-  # Procedure SQL
-  {
-    begin: '((^|(?<=;))\\s*)((?i:proc\\s+sql\\b))'
-    beginCaptures:
-      1:
-        name: 'punctuation.whitespace.function.leading.sas'
-      3:
-        name: 'support.function.procedure.sas'
-    end: '((^|(?<=;))\\s*)((?i:quit\\s*))(?=;)'
-    endCaptures:
-      1:
-        name: 'punctuation.whitespace.function.leading.sas'
-      3:
-        name: 'support.function.procedure.sas'
-    patterns: [
-      {include: '#comment'}
-      {include: '#string'}
-      {include: '#constant'}
-      {include: '#variable'}
-      {include: '#function'}
-      {include: '#macro'}
-      {
-        name: 'keyword.control.procedure.sql.sas'
-        match: '\\b(?i:(as|by|case|cross|else|end|except|from|full|group|having|inner|intersect|into|join|left|natural|on|order|outer|right|select|then|union|when|where))\\b'
-      }
-      {
-        name: 'keyword.operator.procedure.sql.sas'
-        match: '\\b(?i:(between|contains|exists|in|is|like))\\b'
-      }
-      {
-        name: 'support.function.procedure.sql.sas'
-        match: '((^|(?<=;))\\s*)(?i:(alter\\s+(table|)|connect|create\\s+(index|table|view|)|delete|describe|disconnect|drop|excute|insert|reset|select|update|validate|where))\\b'
-      }
-    ]
-  }
-  # Procedure
-  {
-    begin: '((^|(?<=;))\\s*)((?i:proc\\s+\\w*))'
-    beginCaptures:
-      1:
-        name: 'punctuation.whitespace.function.leading.sas'
-      3:
-        name: 'support.function.procedure.sas'
-    end: '(^|(?<=;))(?=\\s*((?i:(data|endsas|proc|quit|run)))\\b)'
-    patterns: [
-      {include: '#comment'}
-      {include: '#string'}
-      {include: '#constant'}
-      {include: '#variable'}
-      {include: '#function'}
-      {include: '#macro'}
-      {
-        name: 'support.function.procedure.sas'
-        match: '((^|(?<=;))\\s*)(?i:(abort|age|append|array|attrib|audit|block|break|by|calid|cdfplot|change|checkbox|class|classlev|column|compute|contents|copy|create|datarow|dbencoding|define|delete|deletefunc|deletesubr|delimiter|device|dialog|dur|endcomp|exact|exchange|exclude|explore|fin|fmtlib|fontfile|fontpath|format|formats|freq|function|getnames|guessingrows|hbar|hdfs|histogram|holidur|holistart|holivar|id|idlabel|informat|inset|invalue|item|key|keylabel|keyword|label|line|link|listfunc|listsubr|mapmiss|mapreduce|mean|menu|messages|meta|modify|outargs|outdur|outfin|output|outstart|pageby|partial|picture|pie|pig|plot|ppplot|printer|probplot|profile|prompter|qqplot|radiobox|ranks|rbreak|rbutton|rebuild|record|remove|rename|repair|report|roptions|save|select|selection|separator|source|star|start|statistics|struct|submenu|subroutine|sum|sumby|table|tables|test|text|trantab|truetype|type1|types|value|var|vbar|ways|weight|where|with|write))\\b'
-      }
-      {
-        name: 'support.function.procedure.ods.sas'
-        match: '((^|(?<=;))\\s*)(?i:(band|bubble|colaxis|compare|density|dot|dynamic|ellipse|hbar|hbarparm|hbox|highlow|histogram|hline|inset|keylegend|lineparm|loess|matrix|needle|panelby|pbspline|plot|refline|reg|rowaxis|scatter|series|step|vbar|vbarparm|vbox|vector|vline|waterfall|xaxis|x2axis|yaxis|y2axis))\\b'
-      }
-    ]
-  }
 ]
 'repository': {
+  'data':{
+    patterns: [
+      {
+        begin: '(?:(^|(?<=;))\\s*)((?i:data))\\b'
+        beginCaptures:
+          1:
+            name: 'punctuation.whitespace.function.leading.sas'
+          3:
+            name: 'support.function.data-step.sas'
+        end: '(^|(?<=;))(?=\\s*((?i:(data|endsas|proc|run)))\\b)'
+        patterns: [
+          {include: '#comment'}
+          {include: '#string'}
+          {include: '#constant'}
+          {include: '#variable'}
+          {include: '#function'}
+          {include: '#macro'}
+          {
+            name: 'keyword.control.data-step.sas'
+            match: '\\b(?i:(continue|do|else|end|go|if|leave|link|return|then|to|otherwise|over|select|until|when|while))\\b'
+          }
+          {
+            match: '((^|(?<=;))\\s*)((?i:(abort|array|attrib|by|call|cards|cards4|data|datalines|datalines4|delete|describe|display|drop|error|execute|file|format|infile|informat|input|keep|label|length|list|lostcard|merge|modify|output|put|putlog|redirect|remove|rename|replace|retain|set|update|where|window))\\b)'
+            captures:
+              3:
+                name: 'support.function.data-step.sas'
+          }
+          {
+            match: '((^|(?<=;))\\s*)((?i:declare\\s+(hash|hiter|javaobj|)))'
+            captures:
+              3:
+                name: 'support.function.declare.sas'
+          }
+        ]
+      }
+    ]
+  }
+  'proc-sql': {
+    patterns: [
+      {
+        begin: '((^|(?<=;))\\s*)((?i:proc\\s+sql\\b))'
+        beginCaptures:
+          1:
+            name: 'punctuation.whitespace.function.leading.sas'
+          3:
+            name: 'support.function.procedure.sas'
+        end: '((^|(?<=;))\\s*)((?i:quit\\s*))(?=;)'
+        endCaptures:
+          1:
+            name: 'punctuation.whitespace.function.leading.sas'
+          3:
+            name: 'support.function.procedure.sas'
+        patterns: [
+          {include: '#comment'}
+          {include: '#string'}
+          {include: '#constant'}
+          {include: '#variable'}
+          {include: '#function'}
+          {include: '#macro'}
+          {
+            name: 'keyword.control.procedure.sql.sas'
+            match: '\\b(?i:(as|by|case|cross|else|end|except|from|full|group|having|inner|intersect|into|join|left|natural|on|order|outer|right|select|then|union|when|where))\\b'
+          }
+          {
+            name: 'keyword.operator.procedure.sql.sas'
+            match: '\\b(?i:(between|contains|exists|in|is|like))\\b'
+          }
+          {
+            name: 'support.function.procedure.sql.sas'
+            match: '((^|(?<=;))\\s*)(?i:(alter\\s+(table|)|connect|create\\s+(index|table|view|)|delete|describe|disconnect|drop|excute|insert|reset|select|update|validate|where))\\b'
+          }
+        ]
+      }
+    ]
+  }
+  'proc': {
+    patterns: [
+      {
+        begin: '((^|(?<=;))\\s*)((?i:proc\\s+\\w*))'
+        beginCaptures:
+          1:
+            name: 'punctuation.whitespace.function.leading.sas'
+          3:
+            name: 'support.function.procedure.sas'
+        end: '(^|(?<=;))(?=\\s*((?i:(data|endsas|proc|quit|run)))\\b)'
+        patterns: [
+          {include: '#comment'}
+          {include: '#string'}
+          {include: '#constant'}
+          {include: '#variable'}
+          {include: '#function'}
+          {include: '#macro'}
+          {
+            name: 'support.function.procedure.sas'
+            match: '((^|(?<=;))\\s*)(?i:(abort|age|append|array|attrib|audit|block|break|by|calid|cdfplot|change|checkbox|class|classlev|column|compute|contents|copy|create|datarow|dbencoding|define|delete|deletefunc|deletesubr|delimiter|device|dialog|dur|endcomp|exact|exchange|exclude|explore|fin|fmtlib|fontfile|fontpath|format|formats|freq|function|getnames|guessingrows|hbar|hdfs|histogram|holidur|holistart|holivar|id|idlabel|informat|inset|invalue|item|key|keylabel|keyword|label|line|link|listfunc|listsubr|mapmiss|mapreduce|mean|menu|messages|meta|modify|outargs|outdur|outfin|output|outstart|pageby|partial|picture|pie|pig|plot|ppplot|printer|probplot|profile|prompter|qqplot|radiobox|ranks|rbreak|rbutton|rebuild|record|remove|rename|repair|report|roptions|save|select|selection|separator|source|star|start|statistics|struct|submenu|subroutine|sum|sumby|table|tables|test|text|trantab|truetype|type1|types|value|var|vbar|ways|weight|where|with|write))\\b'
+          }
+          {
+            name: 'support.function.procedure.ods.sas'
+            match: '((^|(?<=;))\\s*)(?i:(band|bubble|colaxis|compare|density|dot|dynamic|ellipse|hbar|hbarparm|hbox|highlow|histogram|hline|inset|keylegend|lineparm|loess|matrix|needle|panelby|pbspline|plot|refline|reg|rowaxis|scatter|series|step|vbar|vbarparm|vbox|vector|vline|waterfall|xaxis|x2axis|yaxis|y2axis))\\b'
+          }
+        ]
+      }
+    ]
+  }
   'comment': {
     patterns: [
       {
