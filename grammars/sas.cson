@@ -117,44 +117,12 @@ patterns: [
       {
         name: 'comment.block.sas'
         begin: '/\\*'
-        captures:
-          0:
-            name: 'punctuation.definition.comment.sas'
         end: '\\*/'
       }
       {
-        begin: '((^|(?<=;))\\s*)(?=\\*)'
-        beginCaptures:
-          1:
-            name: 'punctuation.whitespace.comment.leading.sas'
-        end: '(?!\\G)'
-        patterns: [
-          {
-            name: 'comment.line.asterisk.sas'
-            begin: '\\*'
-            beginCaptures:
-              0:
-                name: 'punctuation.definition.comment.sas'
-            end: '(?=;)'
-          }
-        ]
-      }
-      {
-        begin: '((^|(?<=;))\\s*)(?=%\\*)'
-        beginCaptures:
-          1:
-            name: 'punctuation.whitespace.comment.leading.sas'
-        end: '(?!\\G)'
-        patterns: [
-          {
-            name: 'comment.line.macro.sas'
-            begin: '%\\*'
-            beginCaptures:
-              0:
-                name: 'punctuation.definition.comment.sas'
-            end: '(?=;)'
-          }
-        ]
+        begin: '(^|(?<=;))\\s*\\*'
+        end: ';'
+        name: 'comment.star.sas'
       }
     ]
   }
@@ -181,11 +149,11 @@ patterns: [
       }
       {
         name: 'string.quoted.single.sas'
-        begin: '\''
+        begin: "'"
         beginCaptures:
           0:
             name: 'punctuation.definition.string.begin.sas'
-        end: '\''
+        end: "'"
         endCaptures:
           0:
             name: 'punctuation.definition.string.end.sas'
