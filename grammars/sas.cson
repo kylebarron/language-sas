@@ -183,6 +183,9 @@ patterns: [
         endCaptures:
           0:
             name: 'punctuation.definition.string.end.sas'
+        patterns: [
+          include: '#macro'
+        ]
       }
       {
         name: 'string.quoted.single.sas'
@@ -229,12 +232,14 @@ patterns: [
     patterns: [
       {
         name: 'variable.other.macro.sas'
-        match: '(&+)(\\w+)\\b'
+        match: '(&+)(\\w+)(\\.|\\b)'
         captures:
           1:
             name: 'punctuation.definition.string.begin.sas'
           2:
             name: 'entity.name.type.class.sas'
+          3:
+            name: 'punctuation.definition.string.end.sas'
 
       }
       {
