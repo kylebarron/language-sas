@@ -229,10 +229,13 @@ patterns: [
     patterns: [
       {
         name: 'variable.other.macro.sas'
-        match: '(&+\\w+)\\b'
+        match: '(&+)(\\w+)\\b'
         captures:
           1:
-            name: 'punctuation.definition.variable.sas'
+            name: 'punctuation.definition.string.begin.sas'
+          2:
+            name: 'entity.name.type.class.sas'
+
       }
       {
         name: 'keyword.control.macro.sas'
