@@ -137,11 +137,16 @@ patterns: [
         name: 'keyword.operator.comparison.sas'
       }
       {
-        match: '\\b(^=|¬=|~=|=|>=|<=|>|<)\\b'
+        match: '(^=|¬=|~=|=|>=|<=|>|<)'
         name: 'keyword.operator.comparison.sas'
       }
       {
-        match: '(\\+|-|/|\\*\\*|\\*)'
+        comment: 'match division operator but not path separator'
+        match: '(?<![\\w.&&[^0-9]])/(?![\\w.&&[^0-9]]|$)'
+        name: 'keyword.operator.arithmetic.sas'
+      }
+      {
+        match: '(\\+|-|\\*\\*|\\*)'
         name: 'keyword.operator.arithmetic.sas'
       }
       {
