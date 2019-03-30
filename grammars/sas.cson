@@ -69,6 +69,7 @@ patterns: [
           3:
             name: 'punctuation.terminator.statement.semicolon.sas'
         patterns: [
+          include: '#macro'
           include: 'source.sql'
         ]
       }
